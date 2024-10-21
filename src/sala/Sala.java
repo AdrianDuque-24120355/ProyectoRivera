@@ -1,6 +1,7 @@
 package sala;
 
 import pelicula.Pelicula;
+import sala.utils.Asiento;
 
 import java.time.LocalDate;
 
@@ -12,10 +13,11 @@ public class Sala {
     public Pelicula pelicula;
     public LocalDate HorariosSala;
     public String ID, nombreSala;
+    public Asiento matrizAsiento[][];
 
 
     public Sala(String ID, String nombreSala, int filasDeAsientos, int columnasDeAsientos, int cantidadDeAsientosPremium, int cantidadDeAsientosVIP,
-                Pelicula pelicula) {
+                Pelicula pelicula, Asiento matrizAsiento[][]) {
         this.ID = ID;
         this.filasDeAsientos = filasDeAsientos;
         this.columnasDeAsientos = columnasDeAsientos;
@@ -23,6 +25,7 @@ public class Sala {
         this.CantidadDeAsientosVIP = cantidadDeAsientosVIP;
         this.pelicula = pelicula;
         this.nombreSala = nombreSala;
+        this.matrizAsiento= matrizAsiento;
     }
 
     public int getCapacidadDeAsientos() {
@@ -57,6 +60,9 @@ public class Sala {
     }
     public String getNombreSala() {
         return nombreSala;
+    }
+    public Asiento[][] getMatrizAsiento() {
+        return matrizAsiento;
     }
 
     public String mostrarSala(){

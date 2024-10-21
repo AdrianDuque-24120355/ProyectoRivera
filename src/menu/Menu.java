@@ -50,7 +50,7 @@ public class Menu {
                     Cliente clienteEnSesion = (Cliente)  usuarioEnSesion;
                     Menu_Cliente menuCliente = new Menu_Cliente();
                     int opc=0;
-                    while(opc!=5) {
+                    while(opc!=3) {
                         opc = menuCliente.mostrarMenuCliente();
                         menuCliente.procesarDatosMenu(opc, clienteEnSesion, cine);
                         intentosUsuario = 0;

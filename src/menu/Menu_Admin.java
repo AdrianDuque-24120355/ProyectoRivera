@@ -12,6 +12,7 @@ import cine.Cine;
 import pelicula.Pelicula;
 import pelicula.utils.Categoria;
 import sala.Sala;
+import sala.utils.Asiento;
 import usuarios.admin.Admin;
 import usuarios.cliente.Cliente;
 
@@ -91,7 +92,7 @@ public class Menu_Admin {
                     }
                 }while(columnasAsientos>12);
 
-               cine.asignarAsientoCalidad(filasAsientos,columnasAsientos, cantidadVIP, cantidadPremium);
+               Asiento Asientomatriz=cine.asignarAsientoCalidad(filasAsientos,columnasAsientos, cantidadVIP, cantidadPremium);
 
                Pelicula peliculavalid=null;
                while(peliculavalid == null) {
@@ -105,7 +106,7 @@ public class Menu_Admin {
                         }
                    }
 
-                Sala sala = new Sala(ID, nombresala, filasAsientos, columnasAsientos, cantidadPremium, cantidadVIP, peliculavalid);
+                Sala sala = new Sala(ID, nombresala, filasAsientos, columnasAsientos, cantidadPremium, cantidadVIP, peliculavalid, Asientomatriz);
                 cine.registrarSala(sala);
                break;
 
@@ -189,11 +190,13 @@ public class Menu_Admin {
                 break;
 
             case 6:
+                System.out.println("\n--------Eliminar peliculas--------");
                 System.out.print("Ingresa el ID de la pelicula que desea eliminar: ");
                 String idEliminar= read.nextLine();
                 cine.eliminarPelicula(idEliminar);
                 break;
             case 7:
+                System.out.println("'\n--------Mostrar Peliculas-------");
                 cine.mostrarPeliculas();
                 break;
             case 8:
@@ -203,8 +206,6 @@ public class Menu_Admin {
             default:
                 System.out.println("Opción no válida. Por favor, intentelo de nuevo.");
         }
-
-
     }
 }
 

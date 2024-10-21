@@ -103,6 +103,12 @@ public class Cine {
         String ID=String.format("%c%c%d%d" , letra1, letra2, aleatorio, dia);
         return ID.toUpperCase();
     }
+    public String generarIDCompra(){
+        int aleatorio = rand.nextInt(1000,7000000);
+        int dia = LocalDate.now().getDayOfMonth();
+        String IDC=String.format("COM%d%d", aleatorio, dia);
+        return IDC.toUpperCase();
+    }
 
     public boolean validadFechaFuncion(LocalDate fechaDeseada) {
 
@@ -147,6 +153,9 @@ public class Cine {
         return listaPeliculas.stream().filter(p -> p.getID().equals(idPelicula)).findFirst().orElse(null);
 
     }
+    public Pelicula obtenerPeliculaPorNombre(String nombrePelicula){
+        return listaPeliculas.stream().filter(p -> p.getNombre().equals(nombrePelicula)).findFirst().orElse(null);
+    }
 
     public int mesNacimiento(String CURP){
         char primermes=CURP.charAt(6);
@@ -155,12 +164,11 @@ public class Cine {
         int mesnacimiento=Integer.parseInt(mes);
         return mesnacimiento;
     }
-    public void asignarAsientoCalidad(int filasAsientos, int columnasAsientos, int cantidadAsientosVIP, int cantidadAsientosPremium){
+    public Asiento asignarAsientoCalidad(int filasAsientos, int columnasAsientos, int cantidadAsientosVIP, int cantidadAsientosPremium){
         Asiento salafuncion[][]= new Asiento [filasAsientos][columnasAsientos];
 
-
             if(cantidadAsientosVIP==0) {
-                return;
+
             }
             else {
                 int cantidad = 0;
@@ -175,7 +183,7 @@ public class Cine {
                 } while (cantidad < cantidadAsientosVIP);
             }
             if(cantidadAsientosPremium==0) {
-                    return;
+
             }
             else {
                 int cantidad = 0;
@@ -198,9 +206,10 @@ public class Cine {
                 }
             }
         }
+        return salafuncion[filasAsientos][columnasAsientos];
     }
 
-    public void descuento(){
+    public double descuento() {
         System.out.println("Ingresa tu CURP: ");
         String CurpCliente = read.nextLine();
         this.obtenerClientePorCurp(CurpCliente);
@@ -209,33 +218,46 @@ public class Cine {
         System.out.println("2. Premium");
         System.out.println("3. VIP");
         System.out.println("4. Salir");
-        int opcion2= read.nextInt();
-        switch (opcion2){
+        int opcion2 = read.nextInt();
+        switch (opcion2) {
             case 1:
+                double precio = 100;
                 System.out.println("Elegiste un asiento normal");
                 System.out.println("El precio del asiento es de $100");
-                if (LocalDate.now().getMonthValue()==this.mesNacimiento(CurpCliente)){
-                    double precio=100*0.30;
-                    System.out.printf("Por ser tu mes de cumpleaños, el precio del boleto será "+precio);
+                if (LocalDate.now().getMonthValue() == this.mesNacimiento(CurpCliente)) {
+                    precio = precio * 0.30;
+                    System.out.printf("Por ser tu mes de cumpleaños, el precio del boleto será " + precio);
+                    return precio;
+                } else {
+                    System.out.println("El precio del asiento es de: $" + precio);
+                    return precio;
                 }
-                break;
             case 2:
+                double precioPremium = 200;
                 System.out.println("Elegiste un asiento premium");
                 System.out.println("El precio del asiento es de $200");
-                if (LocalDate.now().getMonthValue()==this.mesNacimiento(CurpCliente)){
-                    double precio=200*0.40;
-                    System.out.printf("Por ser tu mes de cumpleaños, el precio del boleto será "+precio);
+                if (LocalDate.now().getMonthValue() == this.mesNacimiento(CurpCliente)) {
+                    precio = precioPremium * 0.40;
+                    System.out.printf("Por ser tu mes de cumpleaños, el precio del boleto será " + precio);
+                    return precio;
+                } else {
+                    System.out.println("El precio del boleto es: $" + precioPremium);
+                    return precioPremium;
                 }
-                break;
             case 3:
+                double precioVIP = 400;
                 System.out.println("Elegiste un asiento VIP");
                 System.out.println("El precio del asiento es de $400");
-                if (LocalDate.now().getMonthValue()==this.mesNacimiento(CurpCliente)){
-                    double precio=400*0.65;
-                    System.out.printf("Por ser tu mes de cumpleaños, el precio del boleto será "+precio);
+                if (LocalDate.now().getMonthValue() == this.mesNacimiento(CurpCliente)) {
+                    precio = precioVIP * 0.65;
+                    System.out.printf("Por ser tu mes de cumpleaños, el precio del boleto será " + precio);
+                    return precio;
+                } else {
+                    System.out.println("El precio del boleto es: $" + precioVIP);
+                    return precioVIP;
                 }
-                break;
         }
+        return 0;
     }
     public void mostrarSalas(){
          if (this.listaSalas.isEmpty()){
@@ -246,4 +268,15 @@ public class Cine {
              System.out.println(sala.mostrarSala());
          }
     }
-}
+
+    public Sala obtenerSalaporNombre(String salaNombre){
+        return listaSalas.stream().filter(s -> s.getNombreSala().equals(salaNombre)).findFirst().orElse(null);
+    }
+
+    public void seleccionAsientos(int filaAsiento, int columnaAsiento, Asiento asiento[][]){
+        asiento[filaAsiento][columnaAsiento] = Asiento.RESERVADO;
+                }
+            }
+
+
+
