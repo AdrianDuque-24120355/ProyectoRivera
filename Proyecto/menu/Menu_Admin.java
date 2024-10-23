@@ -23,15 +23,16 @@ public class Menu_Admin {
     public int mostrarMenuAdmin() {
         System.out.println("\nSISTEMA CINE");
         System.out.println("1. Registrar cliente");
-        System.out.println("2. Registrar sala");
-        System.out.println("3. Agregar película.");
+        System.out.println("2. Agregar película.");
+        System.out.println("3. Registrar sala");
         System.out.println("4. Modificar detalles de la película.");
         System.out.println("5. Mostrar sala.");
         System.out.println("6. Eliminar pelicula.");
         System.out.println("7. Mostrar películas.");
-        System.out.println("8. Salir");
+        System.out.println("8. Mostrar clientes.");
+        System.out.println("9. Salir");
 
-        System.out.println("Ingrese una opcion: ");
+        System.out.print("Ingrese una opcion: ");
 
         int opcion = read.nextInt();
         return opcion;
@@ -42,29 +43,26 @@ public class Menu_Admin {
         switch (opcion) {
             case 1:
                 System.out.println("---------Registrar Cliente-------");
-                System.out.println("Ingresa nombre de cliente: ");
+                System.out.print("Ingresa nombre de cliente: ");
                 read.nextLine();
                 String nombreCliente = read.nextLine();
-                System.out.println("Ingresa apellido del cliente: ");
+                System.out.print("Ingresa apellido del cliente: ");
                 String apellidoCliente = read.nextLine();
-                System.out.println("Ingresa CURP del cliente: ");
+                System.out.print("Ingresa CURP del cliente: ");
                 String curpCliente = read.nextLine();
-                System.out.println("Ingresa dirección del cliente: ");
+                System.out.print("Ingresa dirección del cliente: ");
                 String direccionCliente = read.nextLine();
-                System.out.println("Ingresa año de nacimiento del cliente: ");
-                int añoNaciCliente = read.nextInt();
-                System.out.println("Ingresa mes de nacimiento del cliente:");
-                int mesNaciCliente = read.nextInt();
-                System.out.println("Ingresa dia de nacimiento del cliente:");
-                int diaNaciCliente = read.nextInt();
-                LocalDate fechaNacimiento = LocalDate.of(añoNaciCliente, mesNaciCliente, diaNaciCliente);
+
+                LocalDate fechaNacimiento= cine.obtenerFechaNacimiento(curpCliente);
+
                 String id = cine.generarIDcliente(nombreCliente, apellidoCliente);
                 System.out.println("Ingrese la contraseña del cliente: ");
-                String contraseñaCliente = read.nextLine();
+                String contraseñaCliente =read.nextLine();
+                read.nextLine();
                 Cliente cliente = new Cliente(id, nombreCliente, apellidoCliente, curpCliente, direccionCliente, fechaNacimiento, contraseñaCliente);
                 cine.registrarCliente(cliente);
                 break;
-            case 2:
+            case 3:
                 System.out.println("---------Registrar sala-------");
                 System.out.print("Ingresa nombre de la sala: ");
                 read.nextLine();
@@ -77,13 +75,13 @@ public class Menu_Admin {
                 int cantidadPremium = read.nextInt();
                 int filasAsientos=0;
                 do {
-                    System.out.println("Ingresa filas de asientos");
+                    System.out.print("Ingresa filas de asientos: ");
                     filasAsientos = read.nextInt();
                     if (filasAsientos>10){
                         System.out.println("Las filas no pueden ser mayor que 10");
                     }
                 }while(filasAsientos>10);
-                System.out.println("Ingresa columnas de asientos");
+                System.out.print("Ingresa columnas de asientos: ");
                 int columnasAsientos=0;
                 do {
                     columnasAsientos = read.nextInt();
@@ -92,7 +90,8 @@ public class Menu_Admin {
                     }
                 }while(columnasAsientos>12);
 
-               Asiento Asientomatriz=cine.asignarAsientoCalidad(filasAsientos,columnasAsientos, cantidadVIP, cantidadPremium);
+               Asiento[][] asientos=new Asiento[filasAsientos][columnasAsientos];
+               Asiento [][] Asientomatriz=cine.asignarAsientoCalidad(filasAsientos, columnasAsientos, cantidadVIP, cantidadPremium);
 
                Pelicula peliculavalid=null;
                while(peliculavalid == null) {
@@ -110,7 +109,7 @@ public class Menu_Admin {
                 cine.registrarSala(sala);
                break;
 
-            case 3:
+            case 2:
                 System.out.println("\n----- AGREGAR PELÍCULA -----\n");
                 System.out.print("Ingresa el nombre de la película: ");
                 read.nextLine();
@@ -148,8 +147,8 @@ public class Menu_Admin {
                     }
                 }
                 System.out.print("Agregar sinópsis: ");
-                String Sinopsis = read.nextLine();
                 read.nextLine();
+                String Sinopsis = read.nextLine();
                 System.out.print("Ingresa la duración de horas de la película: ");
                 int horas = read.nextInt();
                 System.out.print("Ingresa la duración de minutos de la película: ");
@@ -200,6 +199,9 @@ public class Menu_Admin {
                 cine.mostrarPeliculas();
                 break;
             case 8:
+                System.out.println("'\n--------Mostrar clientes-------");
+                cine.mostrarclinente();
+            case 9:
                 salir = true;
                 System.out.println("Gracias por usar el Sistema Integral de Gestión para Cinépolis");
                 break;

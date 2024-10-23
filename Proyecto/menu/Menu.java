@@ -40,7 +40,7 @@ public class Menu {
                     Menu_Admin menuAdmin = new Menu_Admin();
 
                     int opc=0;
-                    while(opc!=8) {
+                    while(opc!=9) {
                         opc = menuAdmin.mostrarMenuAdmin();
                         menuAdmin.procesarDatos(opc, adminEnSesion, cine);
                         intentosUsuario = 0;
@@ -50,7 +50,7 @@ public class Menu {
                     Cliente clienteEnSesion = (Cliente)  usuarioEnSesion;
                     Menu_Cliente menuCliente = new Menu_Cliente();
                     int opc=0;
-                    while(opc!=3) {
+                    while(opc!=4) {
                         opc = menuCliente.mostrarMenuCliente();
                         menuCliente.procesarDatosMenu(opc, clienteEnSesion, cine);
                         intentosUsuario = 0;

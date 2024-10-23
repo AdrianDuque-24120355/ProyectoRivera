@@ -26,5 +26,11 @@ public class Cliente extends Usuario {
     public String getDireccion() {
         return direccion;
     }
+
+    public String mostrarCliente(){
+        String info = String.format("ID: %s, Nombre: %s, Apellidos: %s, Fecha de Nacimiento: %s, CURP: %s, Dirección: %s",
+        getId(), getNombre(), getApellidos(), getFechaNacimiento(), CURP, direccion);
+        return info;
+    }
 }
 

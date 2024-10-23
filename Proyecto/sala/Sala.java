@@ -13,11 +13,10 @@ public class Sala {
     public Pelicula pelicula;
     public LocalDate HorariosSala;
     public String ID, nombreSala;
-    public Asiento matrizAsiento[][];
-
+    public Asiento [][] matrizAsiento;
 
     public Sala(String ID, String nombreSala, int filasDeAsientos, int columnasDeAsientos, int cantidadDeAsientosPremium, int cantidadDeAsientosVIP,
-                Pelicula pelicula, Asiento matrizAsiento[][]) {
+                Pelicula pelicula, Asiento[][] matrizAsiento) {
         this.ID = ID;
         this.filasDeAsientos = filasDeAsientos;
         this.columnasDeAsientos = columnasDeAsientos;
@@ -61,7 +60,7 @@ public class Sala {
     public String getNombreSala() {
         return nombreSala;
     }
-    public Asiento[][] getMatrizAsiento() {
+    public Asiento [][] getMatrizAsiento() {
         return matrizAsiento;
     }
 
